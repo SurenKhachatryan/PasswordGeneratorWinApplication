@@ -73,6 +73,7 @@
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 3;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // textBox2
             // 
@@ -81,15 +82,16 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 3;
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(234, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 13);
+            this.label3.Size = new System.Drawing.Size(82, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Lenght (0-255)";
+            this.label3.Text = "Lenght (1 - 255)";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
@@ -97,9 +99,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(352, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.Size = new System.Drawing.Size(77, 13);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Count";
+            this.label4.Text = "Count (1 - 500)";
             this.label4.Click += new System.EventHandler(this.label3_Click);
             // 
             // radioButton1

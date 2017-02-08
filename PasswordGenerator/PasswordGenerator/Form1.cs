@@ -33,7 +33,7 @@ namespace PasswordGenerator
                     }
                     else
                     {
-                        MessageBox.Show("Count Range 0-500");
+                        MessageBox.Show("Count Range 1-500!!");
                         error = false;
                     }
                 }
@@ -64,10 +64,9 @@ namespace PasswordGenerator
                     {
                         if (passnumber != PassName.ListName.pincode)
                         {
-                            MessageBox.Show("Length Range 0-255!!");
+                            MessageBox.Show("Length Range 1-255!!");
                             error = false;
                         }
-
                     }
                 }
                 if (textBox2.Text != "" && textBox1.Text != "" && passnumber != PassName.ListName.pincode && error)
@@ -106,7 +105,6 @@ namespace PasswordGenerator
                 }
             }
         }
-
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -140,42 +138,36 @@ namespace PasswordGenerator
             passnumber = PassName.ListName.hexadecimal;
             length = 0;
         }
-
         private void radioInteger_CheckedChanged(object sender, EventArgs e)
         {
             textBox1.Enabled = true;
             passnumber = PassName.ListName.integer;
             length = 0;
         }
-
         private void radioUppercase_CheckedChanged(object sender, EventArgs e)
         {
             textBox1.Enabled = true;
             passnumber = PassName.ListName.uppercase;
             length = 0;
         }
-
         private void radioLowercase_CheckedChanged(object sender, EventArgs e)
         {
             textBox1.Enabled = true;
             passnumber = PassName.ListName.lowercase;
             length = 0;
         }
-
         private void radioSimbol_CheckedChanged(object sender, EventArgs e)
         {
             textBox1.Enabled = true;
             passnumber = PassName.ListName.simbol;
             length = 0;
         }
-
         private void radioAllSimbols_CheckedChanged(object sender, EventArgs e)
         {
             textBox1.Enabled = true;
             passnumber = PassName.ListName.allsimbols;
             length = 0;
         }
-
         private void radioPincode_CheckedChanged(object sender, EventArgs e)
         {
             textBox1.Enabled = false;
@@ -224,10 +216,9 @@ namespace PasswordGenerator
                     break;
             }
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != "" || textBox1.Text != "" || listBox1.Text != "")
+            if (textBox1.Text != "" || textBox2.Text != "" || listBox1.Items.Count != 0)
             {
                 listBox1.Items.Clear();
                 textBox1.Clear();
@@ -235,7 +226,25 @@ namespace PasswordGenerator
             }
             else
             {
-                MessageBox.Show("There Is Nothing To Clean Up");
+                MessageBox.Show("There Is Nothing To Clean Up!!");
+            }
+        }
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char chr = e.KeyChar;
+            if (!Char.IsDigit(chr) && chr != 8)
+            {
+                e.Handled = true;
+                MessageBox.Show("Field Only Accepts Numbers(0 - 9)");
+            }
+        }
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char chr = e.KeyChar;
+            if (!Char.IsDigit(chr) && chr != 8)
+            {
+                e.Handled = true;
+                MessageBox.Show("Field Only Accepts Numbers(0 - 9)");
             }
         }
     }
