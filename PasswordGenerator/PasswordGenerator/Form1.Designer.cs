@@ -51,6 +51,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(218, 43);
             this.button1.TabIndex = 1;
+            this.button1.Tag = "";
             this.button1.Text = "Generate";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -67,6 +68,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(237, 25);
+            this.textBox1.MaxLength = 10;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 3;
@@ -75,6 +77,7 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(355, 25);
+            this.textBox2.MaxLength = 10;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 3;
@@ -102,6 +105,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(12, 9);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(86, 17);
@@ -118,7 +122,6 @@
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(58, 17);
             this.radioButton2.TabIndex = 8;
-            this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Integer";
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.radioInteger_CheckedChanged);
@@ -130,7 +133,6 @@
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(77, 17);
             this.radioButton3.TabIndex = 9;
-            this.radioButton3.TabStop = true;
             this.radioButton3.Text = "Uppercase";
             this.radioButton3.UseVisualStyleBackColor = true;
             this.radioButton3.CheckedChanged += new System.EventHandler(this.radioUppercase_CheckedChanged);
@@ -142,7 +144,6 @@
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(77, 17);
             this.radioButton4.TabIndex = 10;
-            this.radioButton4.TabStop = true;
             this.radioButton4.Text = "Lowercase";
             this.radioButton4.UseVisualStyleBackColor = true;
             this.radioButton4.CheckedChanged += new System.EventHandler(this.radioLowercase_CheckedChanged);
@@ -154,7 +155,6 @@
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(56, 17);
             this.radioButton5.TabIndex = 11;
-            this.radioButton5.TabStop = true;
             this.radioButton5.Text = "Simbol";
             this.radioButton5.UseVisualStyleBackColor = true;
             this.radioButton5.CheckedChanged += new System.EventHandler(this.radioSimbol_CheckedChanged);
@@ -166,7 +166,6 @@
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(72, 17);
             this.radioButton6.TabIndex = 12;
-            this.radioButton6.TabStop = true;
             this.radioButton6.Text = "AllSimbols";
             this.radioButton6.UseVisualStyleBackColor = true;
             this.radioButton6.CheckedChanged += new System.EventHandler(this.radioAllSimbols_CheckedChanged);
@@ -178,7 +177,6 @@
             this.radioButton7.Name = "radioButton7";
             this.radioButton7.Size = new System.Drawing.Size(64, 17);
             this.radioButton7.TabIndex = 13;
-            this.radioButton7.TabStop = true;
             this.radioButton7.Text = "Pincode";
             this.radioButton7.UseVisualStyleBackColor = true;
             this.radioButton7.CheckedChanged += new System.EventHandler(this.radioPincode_CheckedChanged);

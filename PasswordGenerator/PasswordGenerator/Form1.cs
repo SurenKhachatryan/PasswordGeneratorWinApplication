@@ -7,68 +7,104 @@ namespace PasswordGenerator
 {
     public partial class Form1 : Form
     {
-        private string[] ArrHexadecimal = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
-        private string[] ArrInteger = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-        private string[] ArrSimbol = { "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "|", "}", "{", ":", "?", ">", "<", "\",", "]", "[", "'", ";", "/", "." };
-        private string[] ArrUppercase = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
-        private string[] ArrLowercase = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-        private string[] ArrAllSimbols = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "|", "}", "{", ":", "?", ">", "<", "\",", "]", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "[", "'", ";", "/", ".", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+        private string ArrHexadecimal = "0123456789ABCDEF";
+        private string ArrInteger = "0123456789";
+        private string ArrSimbol = @"!@#$%^&*()_+|}{:?><\][';/.,""";
+        private string ArrUppercase = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private string ArrLowercase = "abcdefghijklmnopqrstuvwxyz";
+        private string ArrAllSimbols = @"0123ABCDEF';/.,""GHIJKLMopqrstuvwxyzN456789ab_+|}{:?>OPQRSTUVWXYZ<\][cdefghijklmn!@#$%^&*() ";
         private byte length;
         private int count;
+        private bool error = true;
         PassName.ListName passnumber;
-
         public Form1()
         {
             InitializeComponent();
-
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            PWFanctions pwf = new PWFanctions();
-            if (passnumber == PassName.ListName.pincode)
+            error = true;
+            if (textBox2.Text != "" || textBox1.Text != "")
             {
-                length = 4;
+                if (textBox2.Text != "" && error)
+                {
+                    if (0 < long.Parse(textBox2.Text) && 500 >= long.Parse(textBox2.Text))
+                    {
+                    }
+                    else
+                    {
+                        MessageBox.Show("Count Range 0-500");
+                        error = false;
+                    }
+                }
+                if (passnumber == PassName.ListName.pincode)
+                {
+                    if (textBox2.Text != "" && error)
+                    {
+                        length = 4;
+                        count = int.Parse(textBox2.Text);
+                        passgenerator();
+                    }
+                    else
+                    {
+                        if (error)
+                        {
+                            MessageBox.Show("The Number Of Passwords Is Not Specified!!");
+                            error = false;
+                        }
+                    }
+                }
+                if (textBox1.Text != "")
+                {
+                    if (0 < long.Parse(textBox1.Text) && 255 >= long.Parse(textBox1.Text))
+                    {
+                        length = byte.Parse(textBox1.Text);
+                    }
+                    else
+                    {
+                        if (passnumber != PassName.ListName.pincode)
+                        {
+                            MessageBox.Show("Length Range 0-255!!");
+                            error = false;
+                        }
+
+                    }
+                }
+                if (textBox2.Text != "" && textBox1.Text != "" && passnumber != PassName.ListName.pincode && error)
+                {
+                    count = int.Parse(textBox2.Text);
+                    passgenerator();
+                }
+                else
+                {
+                    if (textBox1.Text != "" && passnumber != PassName.ListName.pincode && error)
+                    {
+                        MessageBox.Show("The Number Of Passwords Is Not Specified!!");
+                        error = false;
+                    }
+                    else
+                    {
+                        if (textBox1.Text == "" && error)
+                        {
+                            if (passnumber != PassName.ListName.pincode)
+                            {
+                                MessageBox.Show("Length Of The Password Is Not Set!!");
+                            }
+                        }
+                    }
+                }
             }
             else
             {
-                length = byte.Parse(textBox1.Text);
+                if (passnumber != PassName.ListName.pincode)
+                {
+                    MessageBox.Show("Please Enter Data!!!");
+                }
+                else
+                {
+                    MessageBox.Show("The Number Of Passwords Is Not Specified!!");
+                }
             }
-            count = int.Parse(textBox2.Text);
-            switch (passnumber)
-            {
-                case PassName.ListName.hexadecimal:
-                    listBox1.Items.Clear();
-                    PassPrint(pwf.GetPassword(length, count, ArrHexadecimal.Length, ArrHexadecimal));
-                    break;
-                case PassName.ListName.integer:
-                    listBox1.Items.Clear();
-                    PassPrint(pwf.GetPassword(length, count, ArrInteger.Length, ArrInteger));
-                    break;
-                case PassName.ListName.uppercase:
-                    listBox1.Items.Clear();
-                    PassPrint(pwf.GetPassword(length, count, ArrUppercase.Length, ArrUppercase));
-                    break;
-                case PassName.ListName.lowercase:
-                    listBox1.Items.Clear();
-                    PassPrint(pwf.GetPassword(length, count, ArrLowercase.Length, ArrLowercase));
-                    break;
-                case PassName.ListName.simbol:
-                    listBox1.Items.Clear();
-                    PassPrint(pwf.GetPassword(length, count, ArrSimbol.Length, ArrSimbol));
-                    break;
-                case PassName.ListName.allsimbols:
-                    listBox1.Items.Clear();
-                    PassPrint(pwf.GetPassword(length, count, ArrAllSimbols.Length, ArrAllSimbols));
-                    break;
-                case PassName.ListName.pincode:
-                    listBox1.Items.Clear();
-                    PassPrint(pwf.GetPassword(length, count, ArrInteger.Length, ArrInteger));
-                    break;
-                default:
-
-                    break;
-            }
-
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -88,7 +124,10 @@ namespace PasswordGenerator
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            if (textBox1.Text == "")
+            {
+                length = 0;
+            }
         }
         private void label3_Click(object sender, EventArgs e)
         {
@@ -99,36 +138,42 @@ namespace PasswordGenerator
         {
             textBox1.Enabled = true;
             passnumber = PassName.ListName.hexadecimal;
+            length = 0;
         }
 
         private void radioInteger_CheckedChanged(object sender, EventArgs e)
         {
             textBox1.Enabled = true;
             passnumber = PassName.ListName.integer;
+            length = 0;
         }
 
         private void radioUppercase_CheckedChanged(object sender, EventArgs e)
         {
             textBox1.Enabled = true;
             passnumber = PassName.ListName.uppercase;
+            length = 0;
         }
 
         private void radioLowercase_CheckedChanged(object sender, EventArgs e)
         {
             textBox1.Enabled = true;
             passnumber = PassName.ListName.lowercase;
+            length = 0;
         }
 
         private void radioSimbol_CheckedChanged(object sender, EventArgs e)
         {
             textBox1.Enabled = true;
             passnumber = PassName.ListName.simbol;
+            length = 0;
         }
 
         private void radioAllSimbols_CheckedChanged(object sender, EventArgs e)
         {
             textBox1.Enabled = true;
             passnumber = PassName.ListName.allsimbols;
+            length = 0;
         }
 
         private void radioPincode_CheckedChanged(object sender, EventArgs e)
@@ -144,12 +189,54 @@ namespace PasswordGenerator
             }
             velue.Clear();
         }
+        private void passgenerator()
+        {
+            PWFanctions pwf = new PWFanctions();
+            switch (passnumber)
+            {
+                case PassName.ListName.hexadecimal:
+                    listBox1.Items.Clear();
+                    PassPrint(pwf.GetPassword(length, count, ArrHexadecimal.Length, ArrHexadecimal.ToCharArray()));
+                    break;
+                case PassName.ListName.integer:
+                    listBox1.Items.Clear();
+                    PassPrint(pwf.GetPassword(length, count, ArrInteger.Length, ArrInteger.ToCharArray()));
+                    break;
+                case PassName.ListName.uppercase:
+                    listBox1.Items.Clear();
+                    PassPrint(pwf.GetPassword(length, count, ArrUppercase.Length, ArrUppercase.ToCharArray()));
+                    break;
+                case PassName.ListName.lowercase:
+                    listBox1.Items.Clear();
+                    PassPrint(pwf.GetPassword(length, count, ArrLowercase.Length, ArrLowercase.ToCharArray()));
+                    break;
+                case PassName.ListName.simbol:
+                    listBox1.Items.Clear();
+                    PassPrint(pwf.GetPassword(length, count, ArrSimbol.Length, ArrSimbol.ToCharArray()));
+                    break;
+                case PassName.ListName.allsimbols:
+                    listBox1.Items.Clear();
+                    PassPrint(pwf.GetPassword(length, count, ArrAllSimbols.Length, ArrAllSimbols.ToCharArray()));
+                    break;
+                case PassName.ListName.pincode:
+                    listBox1.Items.Clear();
+                    PassPrint(pwf.GetPassword(length, count, ArrInteger.Length, ArrInteger.ToCharArray()));
+                    break;
+            }
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
-            textBox1.Clear();
-            textBox2.Clear();
+            if (textBox1.Text != "" || textBox1.Text != "" || listBox1.Text != "")
+            {
+                listBox1.Items.Clear();
+                textBox1.Clear();
+                textBox2.Clear();
+            }
+            else
+            {
+                MessageBox.Show("There Is Nothing To Clean Up");
+            }
         }
     }
 }

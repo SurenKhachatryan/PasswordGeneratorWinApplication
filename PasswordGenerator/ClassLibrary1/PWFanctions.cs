@@ -8,7 +8,7 @@ namespace ClassLibrary
         private Random rnd = new Random();
         private List<string> l = new List<string>();
         private string str = string.Empty;
-        public List<string> GetPassword(byte length, int count, int simbollenght, string[] arrsimbols)
+        public List<string> GetPassword(byte length, int count, int simbollenght, char[] arrsimbols)
         {
             for (int i = 0; i < count; i++)
             {
