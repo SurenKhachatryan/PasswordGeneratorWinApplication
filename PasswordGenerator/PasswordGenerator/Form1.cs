@@ -10,7 +10,7 @@ namespace PasswordGenerator
         private string ArrHexadecimal = "0123456789ABCDEF";
         private string ArrInteger = "0123456789";
         private string ArrSimbol = @"!@#$%^&*()_+|}{:?><\][';/.,""";
-        private string ArrUppercase = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private string ArrUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string ArrLowercase = "abcdefghijklmnopqrstuvwxyz";
         private string ArrAllSimbols = @"0123ABCDEF';/.,""GHIJKLMopqrstuvwxyzN456789ab_+|}{:?>OPQRSTUVWXYZ<\][cdefghijklmn!@#$%^&*() ";
         private byte length;
@@ -232,19 +232,25 @@ namespace PasswordGenerator
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             char chr = e.KeyChar;
-            if (!Char.IsDigit(chr) && chr != 8)
+            if (!Char.IsDigit(chr) && chr != 8 || textBox1.Text == "" && chr == '0')
             {
                 e.Handled = true;
-                MessageBox.Show("Field Only Accepts Numbers(0 - 9)");
+                if (chr != '0' && !Char.IsControl(chr))
+                {
+                    MessageBox.Show("Field Only Accepts Numbers(0 - 9)");
+                }
             }
         }
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             char chr = e.KeyChar;
-            if (!Char.IsDigit(chr) && chr != 8)
+            if (!Char.IsDigit(chr) && chr != 8 || textBox2.Text == "" && chr == '0')
             {
                 e.Handled = true;
-                MessageBox.Show("Field Only Accepts Numbers(0 - 9)");
+                if (chr != '0' && !Char.IsControl(chr))
+                {
+                    MessageBox.Show("Field Only Accepts Numbers(0 - 9)");
+                }
             }
         }
     }
